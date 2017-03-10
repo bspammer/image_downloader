@@ -6,6 +6,7 @@ import sys
 
 api_prefix = "https://api.500px.com/v1"
 search_endpoint = "/photos/search"
+outputfile = "download.jpg"
 
 if len(sys.argv) < 2:
     print("Usage: python script.py <searchterm>")
@@ -29,11 +30,11 @@ if images is None or len(images) == 0:
     print("No images for photo")
     exit()
 url = images[0].get("url")
-urllib.urlretrieve(url, filename="download.jpg")
+urllib.urlretrieve(url, filename=outputfile)
 
-im = Image.open("download.jpg")
+im = Image.open(outputfile)
 w, h = im.size
 crop = im.crop((70, h-210, 620, h-60))
 blur = crop.filter(GaussianBlur(radius=9))
 im.paste(blur, (70, h-210))
-im.save("download.jpg")
+im.save(outputfile)
