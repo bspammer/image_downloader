@@ -39,7 +39,7 @@ if photos is None or len(photos) == 0:
 try:
     images = photos[photo_index].get("images")
 except IndexError:
-    print("Not enough photos for specified index, trying first photo instead")
+    print("Not enough photos for specified index, using first photo instead")
     images = photos[0].get("images")
 if images is None or len(images) == 0:
     print("No images for photo")
